@@ -13,11 +13,14 @@ def main():
 
 @lru_cache()
 def wordbreak(s):
+    # print(f's: "{s}"')
+    s = s.replace("'", "").replace('"', '')
     s = s.lower()
     if s in arpabet:
         return arpabet[s]
     middle = len(s)/2
     partition = sorted(list(range(len(s))), key=lambda x: (x-middle)**2-x)
+    # print(f'partition: "{partition}"')
     for i in partition:
         pre, suf = (s[:i], s[i:])
         if pre in arpabet and wordbreak(suf) is not None:
